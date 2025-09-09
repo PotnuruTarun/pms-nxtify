@@ -115,7 +115,11 @@ function Home({ searchQuery = "", selectedCategory = "" }) {
         <div className="modal-overlay" onClick={() => setSelectedProduct(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h2 style={{ marginTop: 0 }}>{selectedProduct.name}</h2>
-            <p><b>Category:</b> {selectedProduct.category || "-"}</p>
+            <p><b>Category:</b> {selectedProduct.category ? (
+              <span className={`chip ${ (selectedProduct.category||'').toLowerCase()==='electronics' ? 'chip-electronics' : (selectedProduct.category||'').toLowerCase()==='fashion' ? 'chip-fashion' : (selectedProduct.category||'').toLowerCase()==='home' ? 'chip-home' : (selectedProduct.category||'').toLowerCase()==='grocery' ? 'chip-grocery' : 'chip-others' }`}>
+                {selectedProduct.category}
+              </span>
+            ) : '-'}</p>
             <p style={{ color: "var(--muted)" }}><b>Description:</b> {selectedProduct.description}</p>
             <h3 style={{ color: "var(--accent)" }}>Price: ₹{selectedProduct.price}</h3>
             <div style={{ display: "flex", justifyContent: "center", marginTop: 16 }}>

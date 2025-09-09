@@ -24,7 +24,7 @@ function App() {
               <span className="brand-badge">P</span>MS
             </NavLink>
             <button
-              className="button theme-toggle"
+              className="button theme-toggle mobile-only"
               aria-label="Toggle theme"
               onClick={() => setTheme((t) => (t === "light" ? "dark" : "light"))}
             >
@@ -65,7 +65,16 @@ function App() {
               <option value="Others">Others</option>
             </select>
           </div>
-          <div className="navbar-right"></div>
+          <div className="navbar-right">
+            <button
+              className="button theme-toggle desktop-only"
+              aria-label="Toggle theme"
+              onClick={() => setTheme((t) => (t === "light" ? "dark" : "light"))}
+            >
+              {theme === "dark" ? "🌙" : "🌞"}
+              <span className="label" style={{ marginLeft: 8 }}>{theme === "dark" ? "Dark" : "Light"}</span>
+            </button>
+          </div>
         </header>
         <main className="content">
           <Routes>
