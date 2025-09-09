@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ProductCard from "../components/ProductCard";
 import ProductForm from "../components/ProductForm";
+import { NavLink } from "react-router-dom";
 
 const API_URL = "https://pms-nxtify.onrender.com/api/products";
 
@@ -262,7 +263,7 @@ function ViewProducts() {
               There are currently no products in the database.<br />
               Click below to add your first product!
             </p>
-            <button
+            <NavLink to="/add"
               className="button"
               style={{
                 background: 'linear-gradient(90deg, #8D6748 0%, #BFA181 100%)',
@@ -279,7 +280,7 @@ function ViewProducts() {
               onClick={() => window.location.href = '/add'}
             >
               Add Product
-            </button>
+            </NavLink>
           </div>
         ) : (
           <div className="product-grid">
