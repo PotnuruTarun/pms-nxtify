@@ -97,9 +97,12 @@ function ProductForm({ onAdd, onUpdate, initialData, onClose }) {
         {initialData && (
           <button type="button" className="button" onClick={onClose}>Cancel</button>
         )}
-      <button type="submit" className="button button-primary">
-        {initialData ? "Update Product" : "Add Product"}
-      </button>
+        <button
+          type="submit"
+          className={initialData ? "button button-add-product" : "button button-primary"}
+        >
+          {initialData ? "Update Product" : "Add Product"}
+        </button>
       </div>
     </form>
   );

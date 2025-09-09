@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, NavLink, useNavigate } from "react-router-dom";
-import Home from "./pages/Home";
+import Landing from "./pages/Landing";
+import ViewProducts from "./pages/Home";
 import AddProduct from "./pages/AddProduct";
 import "./App.css";
 
@@ -13,7 +14,7 @@ function App() {
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
-  
+
 
   return (
     <Router>
@@ -23,6 +24,10 @@ function App() {
             <NavLink to="/" className="brand" end>
               <span className="brand-badge">P</span>MS
             </NavLink>
+
+          </div>
+          {/* Removed searchbar and category dropdown from navbar-center */}
+          <div className="navbar-right">
             <button
               className="button theme-toggle mobile-only"
               aria-label="Toggle theme"
@@ -38,34 +43,12 @@ function App() {
             >
               ☰
             </button>
-            <nav className={`nav-links${navOpen ? " open" : ""}`} onClick={() => setNavOpen(false)}>
+            {/* Desktop nav */}
+            <nav className={`nav-links desktop-only`} style={{ marginLeft: 'auto', marginRight: 16, display: 'flex', alignItems: 'center', gap: 12 }}>
               <NavLink to="/" end className={({ isActive }) => (isActive ? "active" : "")}>Home</NavLink>
+              <NavLink to="/products" className={({ isActive }) => (isActive ? "active" : "")}>View Products</NavLink>
               <NavLink to="/add" className={({ isActive }) => (isActive ? "active" : "")}>Add Product</NavLink>
             </nav>
-          </div>
-          <div className="navbar-center">
-            <div className="searchbar">
-              <input
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search products..."
-                className="searchbar-input"
-              />
-            </div>
-            <select
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="category-select"
-            >
-              <option value="">All Categories</option>
-              <option value="Electronics">Electronics</option>
-              <option value="Fashion">Fashion</option>
-              <option value="Home">Home</option>
-              <option value="Grocery">Grocery</option>
-              <option value="Others">Others</option>
-            </select>
-          </div>
-          <div className="navbar-right">
             <button
               className="button theme-toggle desktop-only"
               aria-label="Toggle theme"
@@ -74,14 +57,31 @@ function App() {
               {theme === "dark" ? "🌙" : "🌞"}
               <span className="label" style={{ marginLeft: 8 }}>{theme === "dark" ? "Dark" : "Light"}</span>
             </button>
+            {/* Mobile nav overlay */}
+            {navOpen && (
+              <div className="mobile-nav-overlay" onClick={() => setNavOpen(false)}>
+                <nav className="mobile-nav" onClick={e => e.stopPropagation()}>
+                  <NavLink to="/" end className={({ isActive }) => (isActive ? "active" : "")}
+                    onClick={() => setNavOpen(false)}
+                  >Home</NavLink>
+                  <NavLink to="/products" className={({ isActive }) => (isActive ? "active" : "")}
+                    onClick={() => setNavOpen(false)}
+                  >View Products</NavLink>
+                  <NavLink to="/add" className={({ isActive }) => (isActive ? "active" : "")}
+                    onClick={() => setNavOpen(false)}
+                  >Add Product</NavLink>
+                </nav>
+              </div>
+            )}
           </div>
         </header>
         <main className="content">
           <Routes>
+            <Route path="/" element={<Landing />} />
             <Route
-              path="/"
+              path="/products"
               element={
-                <Home
+                <ViewProducts
                   searchQuery={searchQuery}
                   selectedCategory={selectedCategory}
                 />
