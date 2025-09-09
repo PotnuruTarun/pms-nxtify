@@ -88,9 +88,14 @@ function ProductForm({ onAdd, onUpdate, initialData, onClose }) {
         />
       </div>
 
-      <button type="submit" className="button-submit">
+      <div style={{ display: "grid", gridTemplateColumns: initialData ? "1fr 1fr" : "1fr", gap: "12px", marginTop: "8px" }}>
+        {initialData && (
+          <button type="button" className="button" onClick={onClose}>Cancel</button>
+        )}
+      <button type="submit" className="button button-primary">
         {initialData ? "Update Product" : "Add Product"}
       </button>
+      </div>
     </form>
   );
 }

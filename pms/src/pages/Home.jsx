@@ -5,9 +5,8 @@ import ProductForm from "../components/ProductForm";
 
 const API_URL = "https://pms-nxtify.onrender.com/api/products";
 
-function Home() {
+function Home({ searchQuery = "", selectedCategory = "" }) {
   const [products, setProducts] = useState([]);
-  const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [editingProduct, setEditingProduct] = useState(null); 
@@ -51,9 +50,11 @@ function Home() {
     }
   };
 
-  const filtered = products.filter((p) =>
-    p.name.toLowerCase().includes(search.toLowerCase())
-  );
+  const filtered = products.filter((p) => {
+    const nameMatch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const categoryMatch = selectedCategory ? (p.category || "").toLowerCase() === selectedCategory.toLowerCase() : true;
+    return nameMatch && categoryMatch;
+  });
 
   const sorted = [...filtered].sort((a, b) => {
     if (sortBy === "name") return a.name.localeCompare(b.name);
@@ -65,29 +66,19 @@ function Home() {
 
   return (
     <div>
-      <div
-        className="search-container"
-        style={{ display: "flex", gap: "12px", marginBottom: "20px" }}
-      >
-        <input
-          type="text"
-          placeholder="Search by name..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="search-input"
-          style={{ flex: 1 }}
-        />
+      <div style={{ display: "flex", gap: "12px", marginBottom: "20px", alignItems: "center" }}>
+        <h2 className="main-title" style={{ margin: 0, flex: 1 }}>Products</h2>
         <select
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value)}
-          className="search-input"
-          style={{ maxWidth: "200px" }}
+          className="category-select"
+          style={{ maxWidth: "220px" }}
         >
           <option value="">Sort By</option>
-          <option value="name"> Name</option>
+          <option value="name">Name</option>
           <option value="category">Category</option>
-          <option value="priceltoh"> Price(Low to High)</option>
-          <option value="pricehtol"> Price(High to Low)</option>
+          <option value="priceltoh">Price (Low to High)</option>
+          <option value="pricehtol">Price (High to Low)</option>
         </select>
       </div>
 
@@ -104,35 +95,27 @@ function Home() {
       </div>
 
       {selectedProduct && (
-        <div className="modal-overlay">
-          <div className="modal-content" style={{ width: "100%" }}>
-            <h2>Name: {selectedProduct.name}</h2>
-            <p><b>Description:</b> {selectedProduct.description}</p>
-            <p><b>Category:</b> {selectedProduct.category}</p>
-            <h3 style={{ color: "#3b82f6" }}>Price:   ₹{selectedProduct.price}</h3>
-            <button onClick={() => setSelectedProduct(null)}>Close</button>
+        <div className="modal-overlay" onClick={() => setSelectedProduct(null)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h2 style={{ marginTop: 0 }}>{selectedProduct.name}</h2>
+            <p><b>Category:</b> {selectedProduct.category || "-"}</p>
+            <p style={{ color: "var(--muted)" }}><b>Description:</b> {selectedProduct.description}</p>
+            <h3 style={{ color: "var(--accent)" }}>Price: ₹{selectedProduct.price}</h3>
+            <div style={{ display: "flex", justifyContent: "center", marginTop: 16 }}>
+              <button className="modal-button" onClick={() => setSelectedProduct(null)}>Close</button>
+            </div>
           </div>
         </div>
       )}
 
       {editingProduct && (
-  <div 
-    className="modal-overlay" 
-    onClick={() => setEditingProduct(null)} 
-  >
-    <div 
-      className="" 
-      onClick={(e) => e.stopPropagation()} 
-      style={{ maxWidth: "100%" }}
-    >
-      <h2>Edit Product</h2>
-      <ProductForm
-        onUpdate={handleUpdate}
-        initialData={editingProduct} 
-      />
-    </div>
-  </div>
-)}
+        <div className="modal-overlay" onClick={() => setEditingProduct(null)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h2 style={{ marginTop: 0 }}>Edit Product</h2>
+            <ProductForm onUpdate={handleUpdate} initialData={editingProduct} />
+          </div>
+        </div>
+      )}
 
     </div>
   );
