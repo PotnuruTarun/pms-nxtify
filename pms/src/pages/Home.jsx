@@ -112,7 +112,7 @@ function Home({ searchQuery = "", selectedCategory = "" }) {
         <div className="modal-overlay" onClick={() => setEditingProduct(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h2 style={{ marginTop: 0 }}>Edit Product</h2>
-            <ProductForm onUpdate={handleUpdate} initialData={editingProduct} />
+            <ProductForm onUpdate={handleUpdate} initialData={editingProduct} onClose={() => setEditingProduct(null)} />
           </div>
         </div>
       )}
