@@ -189,8 +189,9 @@ body {
     padding: 12px 14px;
     border: 1px solid var(--border);
     border-radius: 12px;
-    background: rgba(255,255,255,0.06);
-    color: #e5e7eb;
+    background: var(--input-bg);
+    color: var(--text);
+    caret-color: var(--accent);
     font-size: 15px;
 }
 .form-textarea { min-height: 128px; }
