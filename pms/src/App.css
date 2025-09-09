@@ -195,7 +195,7 @@ body {
     font-size: 15px;
 }
 .form-textarea { min-height: 128px; }
-.form-input::placeholder, .form-textarea::placeholder { color: #94a3b8; }
+.form-input::placeholder, .form-textarea::placeholder { color: var(--muted); }
 .form-input:focus, .form-textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px rgba(37,99,235,0.15); }
 
 /* Modal */
