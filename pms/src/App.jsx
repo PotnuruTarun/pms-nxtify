@@ -17,7 +17,6 @@ function App() {
 
 
   return (
-    <Router>
       <div className="app-root">
         <header className={`navbar ${navOpen ? 'open' : ''}`}>
           <div className="navbar-left">
@@ -91,7 +90,6 @@ function App() {
           </Routes>
         </main>
       </div>
-    </Router>
   );
 }
 
