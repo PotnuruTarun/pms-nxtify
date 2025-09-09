@@ -60,6 +60,11 @@ function ProductCarousel() {
     if (!products.length) return <div style={{ textAlign: 'center', padding: 32 }}>No products to show.</div>;
 
     const product = products[current];
+
+    // Format price with Indian commas
+    const formatINR = (num) =>
+        Number(num).toLocaleString('en-IN', { maximumFractionDigits: 2 });
+
     return (
         <div style={{
             width: '100%',
@@ -74,7 +79,7 @@ function ProductCarousel() {
         }}>
             <div style={{
                 display: 'flex', justifyContent: 'center', alignItems: 'center',
-                fontWeight: 700, fontSize: 26, marginBottom: 0, color: '#fff',width: '100%',
+                fontWeight: 700, fontSize: 26, marginBottom: 0, color: '#fff', width: '100%',
                 background: 'linear-gradient(90deg, #8D6748 0%, #BFA181 100%)',
                 padding: '12px 36px', letterSpacing: 0.5, textShadow: '0 2px 8px rgba(0,0,0,0.10)'
             }}>Recently Added</div>
@@ -116,7 +121,7 @@ function ProductCarousel() {
                 <div style={{ flex: 1, textAlign: 'center', padding: 0 }}>
                     <div style={{ fontSize: 28, fontWeight: 700, color: '#222', marginBottom: 8 }}>Name: {product.name}</div>
                     <div style={{ color: '#BFA181', fontWeight: 500, marginBottom: 8, fontSize: 18 }}>Category: {product.category}</div>
-                    <div style={{ color: '#22c55e', fontWeight: 600, fontSize: 22, marginBottom: 8 }}>Price: ₹{product.price}</div>
+                    <div style={{ color: '#22c55e', fontWeight: 600, fontSize: 22, marginBottom: 8 }}>Price: ₹{formatINR(product.price)}</div>
                 </div>
             </div>
 

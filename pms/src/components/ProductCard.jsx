@@ -1,5 +1,6 @@
 import React from "react";
 
+
 function ProductCard({ product, onDelete, onView, onEdit }) {
   const cat = (product.category || "").toLowerCase();
   const chipClass = `chip ${cat === "electronics" ? "chip-electronics" :
@@ -8,6 +9,9 @@ function ProductCard({ product, onDelete, onView, onEdit }) {
         cat === "grocery" ? "chip-grocery" :
           "chip-others"
     }`;
+
+  // Format price with Indian commas
+  const formatINR = (num) => Number(num).toLocaleString('en-IN', { maximumFractionDigits: 2 });
 
   return (
     <div className="product-card" onClick={() => onView(product)} style={{ cursor: "pointer" }}>
@@ -18,7 +22,7 @@ function ProductCard({ product, onDelete, onView, onEdit }) {
         </div>
         <p className="product-card-description">{product.description}</p>
         <div className="product-meta">
-          <div className="product-price">₹{product.price}</div>
+          <div className="product-price">₹{formatINR(product.price)}</div>
         </div>
         <div className="product-actions" style={{ justifyContent: 'center', display: 'flex', gap: 12 }} onClick={(e) => e.stopPropagation()}>
           <button className="button button-delete" style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontWeight: 700, fontSize: '1rem', padding: '12px 0' }} onClick={() => onDelete(product._id)}>

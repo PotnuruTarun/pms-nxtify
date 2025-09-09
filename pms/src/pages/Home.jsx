@@ -277,7 +277,7 @@ function ViewProducts() {
                 cursor: 'pointer',
                 boxShadow: '0 2px 8px 0 rgba(141,103,72,0.08)'
               }}
-              
+
             >
               Add Product
             </NavLink>
@@ -314,7 +314,7 @@ function ViewProducts() {
                 textShadow: '0 1px 6px rgba(0,0,0,0.10)'
               }}
             >
-              Price: ₹{selectedProduct.price}
+              Price: ₹{Number(selectedProduct.price).toLocaleString('en-IN', { maximumFractionDigits: 2 })}
             </h3>
             <div style={{ display: "flex", justifyContent: "center", marginTop: 16 }}>
               <button className="modal-button" onClick={() => setSelectedProduct(null)}>Close</button>
