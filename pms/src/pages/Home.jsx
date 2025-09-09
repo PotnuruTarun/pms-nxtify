@@ -7,6 +7,7 @@ import ProductForm from "../components/ProductForm";
 
 const API_URL = "https://pms-nxtify.onrender.com/api/products";
 
+
 function ViewProducts() {
   const [products, setProducts] = useState([]);
   const [sortBy, setSortBy] = useState("");
@@ -16,13 +17,18 @@ function ViewProducts() {
   const [confirmDeleteId, setConfirmDeleteId] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [loading, setLoading] = useState(true);
+
   const fetchProducts = async () => {
+    setLoading(true);
     try {
       const res = await axios.get(API_URL);
       setProducts(res.data);
     } catch (err) {
       console.error(err);
       alert("Failed to fetch products");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -219,17 +225,76 @@ function ViewProducts() {
 
 
 
-      <div className="product-grid">
-        {sorted.map((p) => (
-          <ProductCard
-            key={p._id}
-            product={p}
-            onDelete={() => setConfirmDeleteId(p._id)}
-            onView={() => setSelectedProduct(p)}
-            onEdit={() => setEditingProduct(p)}
-          />
-        ))}
-      </div>
+      {loading ? (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          background: 'rgba(255,255,255,0.7)',
+          zIndex: 1000
+        }}>
+          <div className="spinner" style={{ width: 48, height: 48, border: '5px solid #eee', borderTop: '5px solid #8D6748', borderRadius: '50%', animation: 'spin 1s linear infinite' }} />
+        </div>
+      ) : (
+        sorted.length === 0 ? (
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            minHeight: '40vh',
+            gap: 20,
+            background: 'var(--surface, #f9f6f2)',
+            borderRadius: 16,
+            boxShadow: '0 2px 16px 0 rgba(0,0,0,0.04)',
+            margin: '32px auto',
+            maxWidth: 480,
+            padding: '48px 24px',
+          }}>
+            <div style={{ fontSize: 56, marginBottom: 0, lineHeight: 1 }} role="img" aria-label="Sad face">😔</div>
+            <h2 style={{ color: 'var(--text, #8D6748)', margin: 0, fontWeight: 700, fontSize: 24 }}>No products present</h2>
+            <p style={{ color: 'var(--muted, #a89b8c)', fontSize: 16, margin: 0, textAlign: 'center' }}>
+              There are currently no products in the database.<br />
+              Click below to add your first product!
+            </p>
+            <button
+              className="button"
+              style={{
+                background: 'linear-gradient(90deg, #8D6748 0%, #BFA181 100%)',
+                color: '#fff',
+                fontWeight: 600,
+                fontSize: 18,
+                border: 'none',
+                borderRadius: 8,
+                padding: '12px 32px',
+                marginTop: 12,
+                cursor: 'pointer',
+                boxShadow: '0 2px 8px 0 rgba(141,103,72,0.08)'
+              }}
+              onClick={() => window.location.href = '/add'}
+            >
+              Add Product
+            </button>
+          </div>
+        ) : (
+          <div className="product-grid">
+            {sorted.map((p) => (
+              <ProductCard
+                key={p._id}
+                product={p}
+                onDelete={() => setConfirmDeleteId(p._id)}
+                onView={() => setSelectedProduct(p)}
+                onEdit={() => setEditingProduct(p)}
+              />
+            ))}
+          </div>
+        )
+      )}
 
       {selectedProduct && (
         <div className="modal-overlay" onClick={() => setSelectedProduct(null)}>

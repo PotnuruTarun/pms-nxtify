@@ -1,6 +1,7 @@
 
 import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import ProductCarousel from "../components/ProductCarousel";
 
 const brown = "#8D6748";
 const lightBrown = "#F5EFE6";
@@ -44,6 +45,9 @@ function Landing() {
             }}>
                 {/* Decorative shapes */}
                 <div style={{ position: 'absolute', left: 0, top: 0, width: 180, height: 180, background: '#C7E8C7', borderBottomRightRadius: 80, zIndex: 0 }} />
+                {/* Place carousel after green block, before lavender */}
+                {/* Product Carousel Section at the end */}
+                
                 <div style={{ position: 'absolute', right: 0, top: 0, width: 220, height: 180, background: '#D6D6F7', borderBottomLeftRadius: 80, zIndex: 0 }} />
                 {/* Plant image left (hidden on mobile) */}
                 <img
@@ -110,10 +114,9 @@ function Landing() {
                     </button>
                 </div>
             </section>
-
-
-
-
+            <div style={{ margin: '0 auto'}}>
+                    {/* <ProductCarousel /> */}
+                </div>
             {/* Footer */}
             <footer style={{ background: lightBrown, padding: '94px 20px 16px 0', textAlign: 'center', color: accent, fontWeight: 500, fontSize: 16 }}>
                 &copy; {new Date().getFullYear()} paisawapas. All rights reserved.

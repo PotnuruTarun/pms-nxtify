@@ -1,3 +1,9 @@
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 /* Hide landing hero images on mobile */
 @media (max-width: 600px) {
     .landing-hero-img {
