@@ -277,7 +277,7 @@ function ViewProducts() {
                 cursor: 'pointer',
                 boxShadow: '0 2px 8px 0 rgba(141,103,72,0.08)'
               }}
-              onClick={() => window.location.href = '/add'}
+              
             >
               Add Product
             </NavLink>
