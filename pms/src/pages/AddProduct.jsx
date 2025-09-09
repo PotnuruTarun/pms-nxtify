@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import ProductForm from "../components/ProductForm";
-const API_URL = "http://localhost:5000/api/products"; 
+const API_URL = "https://pms-nxtify.onrender.com/api/products"; 
 function AddProduct() {
 
   const addProduct = async (product) => {

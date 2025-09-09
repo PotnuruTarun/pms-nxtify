@@ -3,7 +3,7 @@ import axios from "axios";
 import ProductCard from "../components/ProductCard";
 import ProductForm from "../components/ProductForm";
 
-const API_URL = "http://localhost:5000/api/products";
+const API_URL = "https://pms-nxtify.onrender.com/api/products";
 
 function Home() {
   const [products, setProducts] = useState([]);
