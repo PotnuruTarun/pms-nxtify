@@ -10,6 +10,7 @@ function Home({ searchQuery = "", selectedCategory = "" }) {
   const [sortBy, setSortBy] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [editingProduct, setEditingProduct] = useState(null); 
+  const [confirmDeleteId, setConfirmDeleteId] = useState(null);
   const fetchProducts = async () => {
     try {
       const res = await axios.get(API_URL);
@@ -25,7 +26,6 @@ function Home({ searchQuery = "", selectedCategory = "" }) {
   }, []);
 
   const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this product?")) return;
     try {
       const res = await axios.delete(`${API_URL}/${id}`);
       if (res.status === 200) {
@@ -35,6 +35,8 @@ function Home({ searchQuery = "", selectedCategory = "" }) {
     } catch (err) {
       console.error(err);
       alert("Failed to delete product");
+    } finally {
+      setConfirmDeleteId(null);
     }
   };
 
@@ -52,7 +54,16 @@ function Home({ searchQuery = "", selectedCategory = "" }) {
 
   const filtered = products.filter((p) => {
     const nameMatch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
-    const categoryMatch = selectedCategory ? (p.category || "").toLowerCase() === selectedCategory.toLowerCase() : true;
+    const productCat = (p.category || "").toLowerCase();
+    let categoryMatch = true;
+    if (selectedCategory) {
+      if (selectedCategory.toLowerCase() === "others") {
+        const core = ["electronics", "fashion", "home", "grocery"];
+        categoryMatch = !core.includes(productCat);
+      } else {
+        categoryMatch = productCat === selectedCategory.toLowerCase();
+      }
+    }
     return nameMatch && categoryMatch;
   });
 
@@ -87,7 +98,7 @@ function Home({ searchQuery = "", selectedCategory = "" }) {
           <ProductCard
             key={p._id}
             product={p}
-            onDelete={handleDelete}
+            onDelete={() => setConfirmDeleteId(p._id)}
             onView={() => setSelectedProduct(p)}
             onEdit={() => setEditingProduct(p)}
           />
@@ -113,6 +124,19 @@ function Home({ searchQuery = "", selectedCategory = "" }) {
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h2 style={{ marginTop: 0 }}>Edit Product</h2>
             <ProductForm onUpdate={handleUpdate} initialData={editingProduct} onClose={() => setEditingProduct(null)} />
+          </div>
+        </div>
+      )}
+
+      {confirmDeleteId && (
+        <div className="modal-overlay" onClick={() => setConfirmDeleteId(null)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h3 style={{ marginTop: 0 }}>Delete this product?</h3>
+            <p style={{ color: "var(--muted)" }}>This action cannot be undone.</p>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginTop: 12 }}>
+              <button className="button" onClick={() => setConfirmDeleteId(null)}>Cancel</button>
+              <button className="button button-danger" onClick={() => handleDelete(confirmDeleteId)}>Delete</button>
+            </div>
           </div>
         </div>
       )}

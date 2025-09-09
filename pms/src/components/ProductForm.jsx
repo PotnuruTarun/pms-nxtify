@@ -20,7 +20,12 @@ function ProductForm({ onAdd, onUpdate, initialData, onClose }) {
   }, [initialData]);
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    let next = value;
+    if (name === "category") {
+      next = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+    }
+    setForm({ ...form, [name]: next });
   };
 
   const handleSubmit = (e) => {

@@ -46,6 +46,7 @@ function App() {
               <option value="Fashion">Fashion</option>
               <option value="Home">Home</option>
               <option value="Grocery">Grocery</option>
+              <option value="Others">Others</option>
             </select>
           </div>
           <div className="navbar-right">
