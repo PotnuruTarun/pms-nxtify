@@ -10,6 +10,7 @@ function Home({ searchQuery = "", selectedCategory = "" }) {
   const [sortBy, setSortBy] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [editingProduct, setEditingProduct] = useState(null); 
+  const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
   const [confirmDeleteId, setConfirmDeleteId] = useState(null);
   const fetchProducts = async () => {
     try {
@@ -79,10 +80,15 @@ function Home({ searchQuery = "", selectedCategory = "" }) {
     <div>
       <div style={{ display: "flex", gap: "12px", marginBottom: "20px", alignItems: "center" }}>
         <h2 className="main-title" style={{ margin: 0, flex: 1 }}>Products</h2>
+        <button className="button filter-button" aria-label="Filter / Sort" title="Filter / Sort" onClick={() => setMobileFilterOpen(true)}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3 5h18M6 12h12M10 19h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+          </svg>
+        </button>
         <select
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value)}
-          className="category-select"
+          className="category-select sort-select"
           style={{ maxWidth: "220px" }}
         >
           <option value="">Sort By</option>
@@ -124,6 +130,29 @@ function Home({ searchQuery = "", selectedCategory = "" }) {
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h2 style={{ marginTop: 0 }}>Edit Product</h2>
             <ProductForm onUpdate={handleUpdate} initialData={editingProduct} onClose={() => setEditingProduct(null)} />
+          </div>
+        </div>
+      )}
+
+      {mobileFilterOpen && (
+        <div className="modal-overlay" onClick={() => setMobileFilterOpen(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h3 style={{ marginTop: 0 }}>Sort Products</h3>
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="category-select"
+              style={{ width: "100%" }}
+            >
+              <option value="">Sort By</option>
+              <option value="name">Name</option>
+              <option value="category">Category</option>
+              <option value="priceltoh">Price (Low to High)</option>
+              <option value="pricehtol">Price (High to Low)</option>
+            </select>
+            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 12 }}>
+              <button className="button" onClick={() => setMobileFilterOpen(false)}>Done</button>
+            </div>
           </div>
         </div>
       )}

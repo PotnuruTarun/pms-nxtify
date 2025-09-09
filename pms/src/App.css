@@ -67,6 +67,8 @@ body {
     border-bottom: 1px solid var(--border);
 }
 .navbar-left { display: flex; align-items: center; gap: 20px; }
+.theme-toggle .label { display: inline; }
+.menu-button { display: none; }
 .nav-links { display: flex; gap: 12px; }
 .nav-links a { color: var(--nav-link); text-decoration: none; padding: 8px 12px; border-radius: 10px; }
 .nav-links a.active { background: var(--nav-link-active-bg); color: var(--nav-link-active-fg); }
@@ -91,6 +93,7 @@ body {
 }
 
 .navbar-center { display: flex; align-items: center; gap: 12px; flex: 1; max-width: 760px; }
+.navbar.open .navbar-center { display: none; }
 .searchbar { flex: 1; }
 .searchbar-input {
     width: 100%;
@@ -122,6 +125,21 @@ body {
     font-size: 32px;
     font-weight: 700;
     margin-bottom: 24px;
+}
+
+/* Mobile navbar */
+@media (max-width: 760px) {
+  .navbar { flex-wrap: wrap; gap: 10px; }
+  .navbar-left { width: 100%; justify-content: flex-start; gap: 12px; }
+  .brand { margin-right: auto; }
+  .theme-toggle { margin-left: auto; }
+  .theme-toggle .label { display: none; }
+  .theme-toggle { padding: 8px 10px; }
+  .menu-button { display: inline-flex; padding: 8px 10px; }
+  .nav-links { display: none; position: absolute; top: 56px; left: 0; right: 0; background: var(--nav-bg); border-bottom: 1px solid var(--border); padding: 10px 16px; gap: 8px; }
+  .nav-links.open { display: flex; flex-direction: column; }
+  .navbar-center { width: 100%; order: 3; }
+  .navbar-right { width: 100%; order: 2; display: flex; justify-content: flex-end; }
 }
 
 /* Grid */
@@ -171,6 +189,13 @@ body {
 .button-primary:hover { box-shadow: 0 8px 20px rgba(37,99,235,0.25); }
 .button-danger { background: linear-gradient(180deg, rgba(239,68,68,0.9), rgba(239,68,68,0.75)); color: #fff; border-color: rgba(239,68,68,0.4); }
 .button-danger:hover { box-shadow: 0 8px 20px rgba(239,68,68,0.25); }
+
+/* Filter button visibility */
+.filter-button { display: none; }
+@media (max-width: 760px) {
+  .sort-select { display: none; }
+  .filter-button { display: inline-flex; padding: 10px 12px; }
+}
 
 /* Forms */
 .form-container {
