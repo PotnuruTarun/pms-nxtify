@@ -1,5 +1,4 @@
 
-// View Products page (was Home)
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ProductCard from "../components/ProductCard";
@@ -136,7 +135,6 @@ function ViewProducts() {
 
         }} className="filters-wrapper"
       >
-        {/* Search Bar - Full width */}
         <div style={{ width: "100%", marginBottom: 12 }}>
           <input
             value={searchQuery}
@@ -153,7 +151,6 @@ function ViewProducts() {
           />
         </div>
 
-        {/* Dropdowns - Side by side */}
         <div
           style={{
             display: "flex",

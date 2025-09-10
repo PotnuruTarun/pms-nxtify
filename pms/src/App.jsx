@@ -23,9 +23,7 @@ function App() {
             <NavLink to="/" className="brand" end>
               <span className="brand-badge">P</span>MS
             </NavLink>
-
           </div>
-          {/* Removed searchbar and category dropdown from navbar-center */}
           <div className="navbar-right">
             <button
               className="button theme-toggle mobile-only"
@@ -42,7 +40,6 @@ function App() {
             >
               ☰
             </button>
-            {/* Desktop nav */}
             <nav className={`nav-links desktop-only`} style={{ marginLeft: 'auto', marginRight: 16, display: 'flex', alignItems: 'center', gap: 12 }}>
               <NavLink to="/" end className={({ isActive }) => (isActive ? "active" : "")}>Home</NavLink>
               <NavLink to="/products" className={({ isActive }) => (isActive ? "active" : "")}>View Products</NavLink>
@@ -56,7 +53,6 @@ function App() {
               {theme === "dark" ? "🌙" : "🌞"}
               <span className="label" style={{ marginLeft: 8 }}>{theme === "dark" ? "Dark" : "Light"}</span>
             </button>
-            {/* Mobile nav overlay */}
             {navOpen && (
               <div className="mobile-nav-overlay" onClick={() => setNavOpen(false)}>
                 <nav className="mobile-nav" onClick={e => e.stopPropagation()}>

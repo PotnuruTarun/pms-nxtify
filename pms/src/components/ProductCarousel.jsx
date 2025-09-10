@@ -15,7 +15,6 @@ function ProductCarousel() {
             setError(null);
             try {
                 const res = await axios.get(API_URL);
-                // Show at most 4 most recent products
                 const all = res.data || [];
                 setProducts(all.slice(-4).reverse());
             } catch (err) {
@@ -27,7 +26,6 @@ function ProductCarousel() {
         fetchProducts();
     }, []);
 
-    // Auto-slide logic
     const intervalRef = useRef();
     useEffect(() => {
         if (!products.length) return;
@@ -37,7 +35,6 @@ function ProductCarousel() {
         return () => clearInterval(intervalRef.current);
     }, [products]);
 
-    // Manual navigation
     const goPrev = () => setCurrent((prev) => (prev - 1 + products.length) % products.length);
     const goNext = () => setCurrent((prev) => (prev + 1) % products.length);
 
@@ -61,7 +58,6 @@ function ProductCarousel() {
 
     const product = products[current];
 
-    // Format price with Indian commas
     const formatINR = (num) =>
         Number(num).toLocaleString('en-IN', { maximumFractionDigits: 2 });
 
@@ -83,7 +79,6 @@ function ProductCarousel() {
                 background: 'linear-gradient(90deg, #8D6748 0%, #BFA181 100%)',
                 padding: '12px 36px', letterSpacing: 0.5, textShadow: '0 2px 8px rgba(0,0,0,0.10)'
             }}>Recently Added</div>
-            {/* Left Arrow */}
             <button onClick={goPrev} aria-label="Previous" style={{
                 position: 'absolute',
                 left: 0,
@@ -104,7 +99,6 @@ function ProductCarousel() {
                 outline: 'none',
             }}>&lt;</button>
 
-            {/* Main Slide Content */}
             <div style={{
                 width: '100%',
                 maxWidth: 900,
@@ -125,7 +119,6 @@ function ProductCarousel() {
                 </div>
             </div>
 
-            {/* Right Arrow */}
             <button onClick={goNext} aria-label="Next" style={{
                 position: 'absolute',
                 right: 0,
@@ -146,7 +139,6 @@ function ProductCarousel() {
                 outline: 'none',
             }}>&gt;</button>
 
-            {/* Dot Indicators */}
             <div style={{
                 position: 'absolute',
                 left: '50%',

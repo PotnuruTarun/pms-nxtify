@@ -1,5 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+:root[data-theme="light"] {
+    --page: #F5EFE6;
+    --text: #3B2210;
+    --bg: #fff;
+    --surface: #fff;
+    --muted: #8D6748;
+    --border: #E5D3B3;
+    --shadow: 0 8px 24px rgba(141, 103, 72, 0.08);
+    --radius: 16px;
+    --accent: #BFA181;
+    --accent-2: #8D6748;
+    --nav-bg: #fff;
+    --nav-link: #8D6748;
+    --nav-link-active-bg: #F5EFE6;
+    --nav-link-active-fg: #8D6748;
+    --input-bg: #F5EFE6;
+    --chip-bg: #F5EFE6;
+    --chip-fg: #8D6748;
+}
 
+:root,
+:root[data-theme="dark"] {
+    --page: #2D2217;
+    --text: #F5EFE6;
+    --bg: #3B2C1A;
+    --surface: #3B2C1A;
+    --muted: #BFA181;
+    --border: #8D6748;
+    --shadow: 0 12px 30px rgba(141, 103, 72, 0.18);
+    --radius: 16px;
+    --accent: #BFA181;
+    --accent-2: #F5EFE6;
+    --nav-bg: #2D2217;
+    --nav-link: #F5EFE6;
+    --nav-link-active-bg: #8D6748;
+    --nav-link-active-fg: #fff;
+    --input-bg: #3B2C1A;
+    --chip-bg: #8D6748;
+    --chip-fg: #fff;
+}
 
 @keyframes spin {
     100% {
@@ -7,14 +46,12 @@
     }
 }
 
-/* Hide landing hero images on mobile */
 @media (max-width: 600px) {
     .landing-hero-img {
         display: none !important;
     }
 }
 
-/* Mobile nav overlay styles */
 .mobile-nav-overlay {
     position: fixed;
     inset: 0;
@@ -183,50 +220,6 @@ textarea {
     color: #fff;
 }
 
-/* Theme tokens (dark default) and light variant */
-
-/* Brown/Light theme for light mode */
-:root[data-theme="light"] {
-    --page: #F5EFE6;
-    --text: #3B2210;
-    --bg: #fff;
-    --surface: #fff;
-    --muted: #8D6748;
-    --border: #E5D3B3;
-    --shadow: 0 8px 24px rgba(141, 103, 72, 0.08);
-    --radius: 16px;
-    --accent: #BFA181;
-    --accent-2: #8D6748;
-    --nav-bg: #fff;
-    --nav-link: #8D6748;
-    --nav-link-active-bg: #F5EFE6;
-    --nav-link-active-fg: #8D6748;
-    --input-bg: #F5EFE6;
-    --chip-bg: #F5EFE6;
-    --chip-fg: #8D6748;
-}
-
-/* Brown/Dark theme for dark mode */
-:root,
-:root[data-theme="dark"] {
-    --page: #2D2217;
-    --text: #F5EFE6;
-    --bg: #3B2C1A;
-    --surface: #3B2C1A;
-    --muted: #BFA181;
-    --border: #8D6748;
-    --shadow: 0 12px 30px rgba(141, 103, 72, 0.18);
-    --radius: 16px;
-    --accent: #BFA181;
-    --accent-2: #F5EFE6;
-    --nav-bg: #2D2217;
-    --nav-link: #F5EFE6;
-    --nav-link-active-bg: #8D6748;
-    --nav-link-active-fg: #fff;
-    --input-bg: #3B2C1A;
-    --chip-bg: #8D6748;
-    --chip-fg: #fff;
-}
 
 .app-root {
     min-height: 100vh;
@@ -260,7 +253,6 @@ textarea {
     display: inline;
 }
 
-/* Desktop/mobile visibility helpers */
 .desktop-only {
     display: inline-flex;
 }
@@ -398,7 +390,6 @@ textarea {
     margin-bottom: 24px;
 }
 
-/* Mobile navbar */
 @media (max-width: 760px) {
     .navbar {
         flex-wrap: wrap;
@@ -472,7 +463,6 @@ textarea {
     justify-content: flex-end
 }
 
-/*mobile filters container*/
 @media (max-width: 551px) {
     .filters-container {
         display: none
@@ -653,7 +643,6 @@ textarea {
     box-shadow: 0 8px 20px rgba(239, 68, 68, 0.25);
 }
 
-/* Filter button visibility */
 .filter-button {
     display: none;
 }
@@ -719,7 +708,6 @@ textarea {
     box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
 }
 
-/* Modal */
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -762,7 +750,6 @@ textarea {
     color: #fff;
 }
 
-/* Add page container helpers */
 .add-product-page {
     display: flex;
     flex-direction: column;

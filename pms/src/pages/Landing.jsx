@@ -32,7 +32,6 @@ function Landing() {
 
     return (
         <div style={{ fontFamily: 'Poppins, Inter, sans-serif', background: lightBrown, color: brown, Height: '100vh' }}>
-            {/* Animated Hero Section */}
             <section style={{
                 minHeight: '70vh',
                 display: 'flex',
@@ -43,13 +42,9 @@ function Landing() {
                 overflow: 'hidden',
                 background: lightBrown
             }}>
-                {/* Decorative shapes */}
                 <div style={{ position: 'absolute', left: 0, top: 0, width: 180, height: 180, background: '#C7E8C7', borderBottomRightRadius: 80, zIndex: 0 }} />
-                {/* Place carousel after green block, before lavender */}
-                {/* Product Carousel Section at the end */}
-                
                 <div style={{ position: 'absolute', right: 0, top: 0, width: 220, height: 180, background: '#D6D6F7', borderBottomLeftRadius: 80, zIndex: 0 }} />
-                {/* Plant image left (hidden on mobile) */}
+               
                 <img
                     ref={el => heroRefs.current[0] = el}
                     src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=facearea&w=400&q=80"
@@ -57,7 +52,6 @@ function Landing() {
                     className="landing-hero-img landing-hero-img-left"
                     style={{ position: 'absolute', left: 32, bottom: 0, width: 120, height: 160, objectFit: 'cover', borderRadius: 24, boxShadow: '0 8px 32px rgba(141,103,72,0.10)', zIndex: 1, display: 'block' }}
                 />
-                {/* Gift image right (hidden on mobile) */}
                 <img
                     ref={el => heroRefs.current[1] = el}
                     src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=facearea&w=400&q=80"
@@ -65,7 +59,6 @@ function Landing() {
                     className="landing-hero-img landing-hero-img-right"
                     style={{ position: 'absolute', right: 32, bottom: 0, width: 140, height: 140, objectFit: 'cover', borderRadius: 24, boxShadow: '0 8px 32px rgba(191,161,129,0.10)', zIndex: 1, display: 'block' }}
                 />
-                {/* Title and description */}
                 <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', marginTop: 40 }}>
                     <h1
                         ref={el => heroRefs.current[2] = el}
@@ -89,7 +82,7 @@ function Landing() {
                             fontWeight: 500
                         }}
                     >
-                        Effortlessly manage, track, and grow your products in one beautiful dashboard.
+                        Track, Stack, and Grow — watch your products flow.
                     </p>
                     <button
                         ref={el => heroRefs.current[4] = el}
@@ -115,9 +108,7 @@ function Landing() {
                 </div>
             </section>
             <div style={{ margin: '0 auto'}}>
-                    {/* <ProductCarousel /> */}
                 </div>
-            {/* Footer */}
             <footer style={{ background: lightBrown, padding: '94px 20px 16px 0', textAlign: 'center', color: accent, fontWeight: 500, fontSize: 16 }}>
                 &copy; {new Date().getFullYear()} paisawapas. All rights reserved.
             </footer>
